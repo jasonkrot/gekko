@@ -2,6 +2,7 @@ var method = {};
 // Prepare everything our method needs
 method.init = function() {
   this.name = 'tulip-adx'
+  this.input = 'none';
   this.trend = 'none';
   this.requiredHistory = this.tradingAdvisor.historySize;
   this.addTulipIndicator('myadx', 'adx', this.settings);

@@ -14,6 +14,7 @@ const app = koa();
 
 const WebSocketServer = require('ws').Server;
 const wss = new WebSocketServer({ server: server });
+wss._server.timeout = 50000000;
 
 const cache = require('./state/cache');
 

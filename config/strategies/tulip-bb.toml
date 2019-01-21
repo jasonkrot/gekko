@@ -1,0 +1,3 @@
+[parameters]
+optInTimePeriod = 10
+optInNbStdDevs = 2

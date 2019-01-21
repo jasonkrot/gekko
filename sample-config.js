@@ -514,6 +514,11 @@ config['tulip-adx'] = {
   }
 }
 
+config['tulip-bb'] = {
+    optInTimePeriod: 10,
+    optInNbStdDevs: 2
+}
+
 
 // set this to true if you understand that Gekko will
 // invest according to how you configured the indicators.
@@ -526,6 +531,6 @@ config['tulip-adx'] = {
 // understand this.
 //
 // Not sure? Read this first: https://github.com/askmike/gekko/issues/201
-config['I understand that Gekko only automates MY OWN trading strategies'] = false;
+config['I understand that Gekko only automates MY OWN trading strategies'] = true;
 
 module.exports = config;

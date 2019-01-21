@@ -37,9 +37,13 @@
     "semver": "5.4.1",
     "sqlite3": "^4.0.4",
     "stats-lite": "^2.0.4",
+    "talib": "^1.0.2",
     "tiny-promisify": "^0.1.1",
     "toml": "^2.3.0",
-    "ws": "^6.0.0"
+    "tulind": "^0.8.9",
+    "twitter": "^1.7.1",
+    "ws": "^6.0.0",
+    "zaif.jp": "^0.1.4"
   },
   "devDependencies": {
     "chai": "^4.1.2",

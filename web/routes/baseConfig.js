@@ -17,13 +17,14 @@ config.tradingAdvisor = {
 }
 
 config.candleWriter = {
-  enabled: false
+  enabled: true
 }
 
 config.backtestResultExporter = {
   enabled: false,
   writeToDisk: false,
   data: {
+    indicatorResults: true,
     stratUpdates: false,
     roundtrips: true,
     stratCandles: true,
