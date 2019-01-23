@@ -65,6 +65,7 @@ Actor.prototype.setupStrategy = function() {
       e => this.deferredEmit('stratWarmupCompleted', e)
     )
     .on('advice', this.relayAdvice)
+    .on('indicatorResults', this.relayIndicatorResult)
     .on(
       'stratUpdate',
       e => this.deferredEmit('stratUpdate', e)
@@ -116,6 +117,12 @@ Actor.prototype.finish = function(done) {
 Actor.prototype.relayAdvice = function(advice) {
   advice.date = this.candle.start.clone().add(1, 'minute');
   this.deferredEmit('advice', advice);
+}
+
+// EMITTERS
+Actor.prototype.relayIndicatorResult = function(indicatorResult) {
+    indicatorResult.date = this.candle.start.clone().add(1, 'minute');
+  this.deferredEmit('indicatorResults', indicatorResult);
 }
 
 

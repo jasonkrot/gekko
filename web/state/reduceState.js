@@ -3,7 +3,7 @@
 
 const skipInitialEvents = ['marketUpdate'];
 const skipLatestEvents = ['marketStart', 'stratWarmupCompleted'];
-const trackAllEvents = ['tradeCompleted', 'advice', 'roundtrip'];
+const trackAllEvents = ['tradeCompleted', 'advice', 'roundtrip', 'indicatorResults'];
 
 const reduce = (state, event) => {
   const type = event.type;

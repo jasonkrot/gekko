@@ -39,7 +39,6 @@ export default {
     this.emitConfig();
   },
 reorder: function(datas){
-console.log(42, "marketpicker.vue", datas);
 },
   computed: {
     exchanges: function() {

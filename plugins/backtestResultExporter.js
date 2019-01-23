@@ -14,6 +14,7 @@ const BacktestResultExporter = function() {
   this.roundtrips = [];
   this.stratUpdates = [];
   this.stratCandles = [];
+  this.indicatorResults = [];
   this.trades = [];
 
   this.candleProps = config.backtestResultExporter.data.stratCandleProps;
@@ -26,6 +27,9 @@ const BacktestResultExporter = function() {
 
   if(!config.backtestResultExporter.data.stratCandles)
     this.processStratCandles = null;
+
+  if(!config.backtestResultExporter.data.indicatorResults)
+    this.processIndicatorResults = null;
 
   if(!config.backtestResultExporter.data.portfolioValues)
     this.processPortfolioValueChange = null;
@@ -61,6 +65,10 @@ BacktestResultExporter.prototype.processStratCandle = function(candle) {
   this.stratCandles.push(strippedCandle);
 };
 
+BacktestResultExporter.prototype.processIndicatorResults = function(indicatorResult) {
+  this.indicatorResults.push(indicatorResult);
+};
+
 BacktestResultExporter.prototype.processRoundtrip = function(roundtrip) {
   this.roundtrips.push({
     ...roundtrip,
@@ -94,7 +102,10 @@ BacktestResultExporter.prototype.finalize = function(done) {
     strategyParameters: config[config.tradingAdvisor.method],
     performanceReport: this.performanceReport
   };
-
+  
+  if(config.backtestResultExporter.data.indicatorResults)
+    backtest.indicatorResults = this.indicatorResults;
+console.log(100, 'backtestResultExporter.js', backtest.indicatorResults, config.backtestResultExporter.data);
   if(config.backtestResultExporter.data.stratUpdates)
     backtest.stratUpdates = this.stratUpdates;
 

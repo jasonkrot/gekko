@@ -24,7 +24,7 @@ config.backtestResultExporter = {
   enabled: false,
   writeToDisk: false,
   data: {
-    indicatorResults: true,
+      indicatorResults: true,
     stratUpdates: false,
     roundtrips: true,
     stratCandles: true,

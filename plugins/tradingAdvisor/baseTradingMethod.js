@@ -301,12 +301,19 @@ Base.prototype.advice = function(newDirection) {
   }
 
   this.emit('advice', advice);
-
+  
   return this.propogatedAdvices;
 }
 
 Base.prototype.notify = function(content) {
   this.emit('stratNotification', {
+    content,
+    date: new Date(),
+  })
+}
+
+Base.prototype.indicatorResults = function(content) {
+  this.emit('indicatorResults', {
     content,
     date: new Date(),
   })

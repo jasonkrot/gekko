@@ -36,7 +36,6 @@ export default {
     render: function() {
       this.remove();
 
-
       if(_.size(this.data.candles) < MIN_CANDLES) {
         drawMessage('Not enough data to spawn chart');
       } else {

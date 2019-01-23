@@ -98,8 +98,6 @@ export default function(_data, _trades) {
         return trade;
     });
 
-    console.log(trades);
-
     x.domain(data.map(accessor.d));
     y.domain(techan.scale.plot.ohlc(data, accessor).domain());
 
