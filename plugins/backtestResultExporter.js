@@ -105,7 +105,7 @@ BacktestResultExporter.prototype.finalize = function(done) {
   
   if(config.backtestResultExporter.data.indicatorResults)
     backtest.indicatorResults = this.indicatorResults;
-console.log(100, 'backtestResultExporter.js', backtest.indicatorResults, config.backtestResultExporter.data);
+  
   if(config.backtestResultExporter.data.stratUpdates)
     backtest.stratUpdates = this.stratUpdates;
 

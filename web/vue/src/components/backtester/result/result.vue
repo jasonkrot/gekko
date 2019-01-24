@@ -29,6 +29,7 @@ export default {
   computed: {
     candles: function() {
       return {
+          indicatorResults: this.result.indicatorResults,
         candles: this.result.stratCandles,
         trades: this.result.trades
       };

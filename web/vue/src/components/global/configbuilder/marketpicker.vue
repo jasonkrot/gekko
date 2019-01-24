@@ -65,12 +65,10 @@ reorder: function(datas){
       return exchanges;
     },
     markets: function() {
-        this.exchanges[ this.exchange ] = this.reorder(this.exchanges[ this.exchange ]);
       return this.exchanges ? this.exchanges[ this.exchange ] : null;
     },
 
     assets: function() {
-        this.exchanges[this.exchange].markets[this.currency] = this.reorder(this.exchanges[this.exchange].markets[this.currency]);
       return this.exchanges ? this.exchanges[this.exchange].markets[this.currency] : null;
     },
 

@@ -35,11 +35,11 @@ export default {
     },
     render: function() {
       this.remove();
-
+        console.log(38, 'chartWrapper.vue', this);
       if(_.size(this.data.candles) < MIN_CANDLES) {
         drawMessage('Not enough data to spawn chart');
       } else {
-        chart(this.data.candles, this.data.trades, this.height);
+        chart(this.data.candles, this.data.trades, this.data.indicatorResults, this.height);
       }
     },
     remove: function() {
@@ -86,6 +86,10 @@ export default {
   stroke: steelblue;
   stroke-width: 1.5px;
   clip-path: url(#clip);
+}
+
+#chart .line.black {
+  stroke: black;
 }
 
 /*#chart .price.line {

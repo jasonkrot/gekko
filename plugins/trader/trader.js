@@ -347,7 +347,7 @@ Trader.prototype.createOrder = function(side, amount, advice, id) {
             }
           });
 
-          log.info(`Creating trailingStop trigger "${triggerId}"! Properties:`);
+          console.log(`Creating trailingStop trigger "${triggerId}"! Properties:`);
           log.info(`\tInitial price: ${summary.price}`);
           log.info(`\tTrail of: ${trigger.trailValue}`);
 

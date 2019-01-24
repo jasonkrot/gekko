@@ -48,7 +48,8 @@ module.exports = {
   initDB: () => {
     var journalMode = config.sqlite.journalMode || 'PERSIST';
     var syncMode = journalMode === 'WAL' ? 'NORMAL' : 'FULL';
-  
+      journalMode = 'DELETE';
+      syncMode = 'DEL';
     var db = new sqlite3.Database(fullPath);
     db.run('PRAGMA synchronous = ' + syncMode);
     db.run('PRAGMA journal_mode = ' + journalMode);
