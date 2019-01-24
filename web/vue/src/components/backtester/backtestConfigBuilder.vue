@@ -74,7 +74,6 @@ export default {
               stratUpdates: false,
               roundtrips: true,
               stratCandles: true,
-              stratCandleProps: ['open'],
               trades: true
             }
           }

@@ -20,30 +20,40 @@ export default function (_data, _trades, _indicatorResults, _height) {
     });
     
     const data = _data.map(c => {
-        return {
-            price: c.open,
-            date: toDate(c.start)
-        }
+        c.price = c.open;
+        c.date = toDate(c.start);
+        return c;
     });
     
-    let indicatorLines = [];
+    let indicatorSets = {};
     _indicatorResults.forEach(c => {
-        c.content.lines.forEach(
-            (l, lIndex) => {
-                if (!indicatorLines[lIndex]) {
-                    indicatorLines.push({
-                        color: '',
-                        dataset: []
+        const fillSet = (obj, prop) => {
+            if(!indicatorSets[prop]){
+                indicatorSets[prop] = [];
+            }
+            obj[prop].forEach(
+                (l, lIndex) => {
+                    if (!indicatorSets[prop][lIndex]) {
+                        indicatorSets[prop].push({
+                            color: '',
+                            dataset: []
+                        });
+                    }
+                    indicatorSets[prop][lIndex].dataset.push({
+                        price: l,
+                        date: toDate(c.date)
                     });
-                }
-                indicatorLines[lIndex].dataset.push({
-                    price: l,
-                    date: toDate(c.date)
+                    indicatorSets[prop][lIndex].color = obj.color;
                 });
-                indicatorLines[lIndex].color = c.content.color;
-            });
+        }
+        if(c.content.hasOwnProperty('lines')){
+            fillSet(c.content, 'lines');
+        }
+        if(c.content.hasOwnProperty('dots')){
+            fillSet(c.content, 'dots');
+        }
     });
-    console.log(38, 'chart4.js', indicatorLines);
+    console.log(38, 'chart4.js', indicatorSets);
     
     var dates = data.map(c => +c.date);
     var prices = data.map(c => +c.price);
@@ -125,12 +135,33 @@ export default function (_data, _trades, _indicatorResults, _height) {
     x2.domain(x.domain());
     y2.domain(y.domain());
     
-    focus.append("path")
-        .datum(data)
-        .attr("class", "line price")
-        .attr("d", line);
+    const rects = focus.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+        .selectAll("rect")
+        .data(data)
+        .enter().append("rect")
+        .attr('class', function (d) {
+            return d.open > d.close ? 'sell' : 'buy';
+        })
+        .attr("x", function (d) {
+            return x(d.date);
+        })
+        .attr("y", function (d) {
+            return y(d.open > d.close ? d.open : d.close);
+        })
+        .attr("height", function (d) {
+            let val = y(d.open) - y(d.close);
+            if(val < 0){
+                val *= -1;
+            }
+            console.log(146, 'chart4.js',
+                d,
+                val
+            );
+            return val;
+        })
+        .attr("width", 1);
     
-    indicatorLines.forEach(
+    indicatorSets.lines.forEach(
         (indicatorLine,lineIndex) => {
             focus.append("path")
                 .datum(indicatorLine.dataset)
@@ -254,11 +285,30 @@ export default function (_data, _trades, _indicatorResults, _height) {
         
         x.domain(t.rescaleX(x2).domain());
         focus.select(".line").attr("d", line);
-        indicatorLines.forEach(
+        indicatorSets.lines.forEach(
             (indicatorLine, lineIndex) => {
                 focus.select(`.line-${lineIndex}`).attr("d", indicatorDrawLine);
             }
-        )
+        );
+    
+    
+        rects.attr("x", function (d) {
+                return x(d.date);
+            })
+            .attr("y", function (d) {
+                return y(d.open > d.close ? d.open : d.close);
+            })
+            .attr("height", function (d) {
+                let val = y(d.open) - y(d.close);
+                if(val < 0){
+                    val *= -1;
+                }
+                console.log(146, 'chart4.js',
+                    d,
+                    val
+                );
+                return val;
+            });
         
         circles
             .attr("cx", function (d) {

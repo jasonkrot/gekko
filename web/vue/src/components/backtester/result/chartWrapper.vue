@@ -35,7 +35,6 @@ export default {
     },
     render: function() {
       this.remove();
-        console.log(38, 'chartWrapper.vue', this);
       if(_.size(this.data.candles) < MIN_CANDLES) {
         drawMessage('Not enough data to spawn chart');
       } else {
@@ -101,6 +100,14 @@ export default {
 }
 
 #chart circle.sell {
+  fill: red;
+}
+
+#chart rect.buy {
+  fill: #7FFF00;
+}
+
+#chart rect.sell {
   fill: red;
 }
 
